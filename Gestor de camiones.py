@@ -15,28 +15,28 @@ INGRESAR_DISTANCIA_RECORRIDA = "Por favor, ingresar la distancia recorrida del c
 SEPARADOR = "---------------------------------------------------------------------------------------------"
 INGRESAR_CARGA_TRANSPORTADA = "Por favor, ingresar la carga transportada del camion en toneladas: "
 
-def printTiempoCentrado(dias,horas,espacioMaximo):
-  if dias==0 and horas==0:
-    printCentradoNumText(0,HORAS,espacioMaximo)
-    return
-  if dias==0:
-    printCentradoNumText(horas,HORAS,espacioMaximo)
-    return
-  if horas==0:
-    printCentradoNumText(dias,DIAS,espacioMaximo)
-    return
-  largoTotal=contarDigitos(dias)+contarDigitos(horas)+3
-  if largoTotal>=espacioMaximo:
-    print(dias,end=STRING_VACIO)
-    print(DIAS,horas,end=STRING_VACIO)
-    print(HORAS,end=STRING_VACIO)
-    return
-  espaciosBlanco=espacioMaximo-largoTotal
-  printNEspacios(espaciosBlanco//2)
-  print(dias,end=STRING_VACIO)
-  print(DIAS,horas,end=STRING_VACIO)
-  print(HORAS,end=STRING_VACIO)
-  printNEspacios(espaciosBlanco-espaciosBlanco//2)
+# def printTiempoCentrado(dias,horas,espacioMaximo):
+#   if dias==0 and horas==0:
+#     printCentradoNumText(0,HORAS,espacioMaximo)
+#     return
+#   if dias==0:
+#     printCentradoNumText(horas,HORAS,espacioMaximo)
+#     return
+#   if horas==0:
+#     printCentradoNumText(dias,DIAS,espacioMaximo)
+#     return
+#   largoTotal=contarDigitos(dias)+contarDigitos(horas)+3
+#   if largoTotal>=espacioMaximo:
+#     print(dias,end=STRING_VACIO)
+#     print(DIAS,horas,end=STRING_VACIO)
+#     print(HORAS,end=STRING_VACIO)
+#     return
+#   espaciosBlanco=espacioMaximo-largoTotal
+#   printNEspacios(espaciosBlanco//2)
+#   print(dias,end=STRING_VACIO)
+#   print(DIAS,horas,end=STRING_VACIO)
+#   print(HORAS,end=STRING_VACIO)
+#   printNEspacios(espaciosBlanco-espaciosBlanco//2)
 
 def intercambiarElementos(lista, posicion):
     aux = lista[posicion + 1]
