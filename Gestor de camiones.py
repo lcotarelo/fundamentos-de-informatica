@@ -1,28 +1,19 @@
-def contarDigitos(numero):
-  contador=0
-  if numero<0:
-    numero=numero*-1
-    contador=1  
-  while numero>0:
-    contador+=1
-    numero=numero//10
-  return contador
-
-def printNEspacios(cantidad):
-  for i in range(cantidad):
-    print(ESPACIO,end=STRING_VACIO)
-
-def printCentradoNumText(numero,texto,espacioMaximo):
-  largoTotal=contarDigitos(numero)+len(texto)
-  if largoTotal>=espacioMaximo:
-    print(numero,end=STRING_VACIO )
-    print(texto,end=STRING_VACIO)
-    return
-  espaciosBlanco=espacioMaximo-largoTotal
-  printNEspacios(espaciosBlanco//2)
-  print(numero,end=STRING_VACIO)
-  print(texto,end=STRING_VACIO)
-  printNEspacios(espaciosBlanco-espaciosBlanco//2)
+HORAS = "H"
+DIAS = "D"
+STRING_VACIO = ""
+ESPACIO = " "
+KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA = 20000
+KILOMETROS = " km"
+TONELADAS = " Tn"
+ANCHO_DE_COLUMNA = 21
+ENCABEZADO_DE_LISTADO = "       CAMION           TIEMPO PROMEDIO    DISTANCIA RECORRIDA      CARGA TOTAL"
+ALERTA_DE_IDCAMION_INVALIDO = "Numero incorrecto, por favor, ingresar un camion con un numero valido (entero positivo) : "
+MENSAJE_REVISION_MECANICA = "Revisión mecánica"
+INGRESAR_ID_CAMION = "Por favor, ingresar el numero de camion: "
+INGRESAR_TIEMPO_DE_USO = "Por favor, ingresar el tiempo de uso del camion en horas: "
+INGRESAR_DISTANCIA_RECORRIDA = "Por favor, ingresar la distancia recorrida del camion en kilometros: "
+SEPARADOR = "---------------------------------------------------------------------------------------------"
+INGRESAR_CARGA_TRANSPORTADA = "Por favor, ingresar la carga transportada del camion en toneladas: "
 
 def printTiempoCentrado(dias,horas,espacioMaximo):
   if dias==0 and horas==0:
@@ -68,7 +59,8 @@ def funcPromedio(tieDeUnCamion,cantidadDeViajesDeUnCamion):
   promedio=tieDeUnCamion//cantidadDeViajesDeUnCamion
   return promedio//24,promedio%24   
     
-def listar(idCamion,tiempoDeUsoDeCamion,distanciaTotalRecorrida,cargaCamion,cantidadDeViajes,idIngresado,tiempoIngresado,distanciaIngresada,cargaIngresada):
+def listar(idCamion,tiempoDeUsoDeCamion,distanciaTotalRecorrida,cargaCamion,cantidadDeViajes,idIngresado,
+           tiempoIngresado,distanciaIngresada,cargaIngresada):
   for i in range(len(idCamion)):
     if idIngresado==idCamion[i]:
       tiempoDeUsoDeCamion[i]=tiempoDeUsoDeCamion[i]+tiempoIngresado
@@ -92,12 +84,16 @@ def confirmarIngreso(idIngresado, tiempoIngresado, distanciaIngresada, cargaIngr
     print("Carga:", cargaIngresada)
     agrega = input("Ingrese S para aceptar u otra tecla para descartar el ingreso: ")
     if agrega == "S" or agrega == "SI" or agrega == "s" or agrega == "si" or agrega == "sI" or agrega == "Si":
-      listaDeCamiones = listar(idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes, idIngresado, tiempoIngresado, distanciaIngresada, cargaIngresada)    
+      listaDeCamiones = listar(idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, 
+                               cantidadDeViajes, idIngresado, tiempoIngresado, distanciaIngresada, cargaIngresada)    
       print("El reporte actual fue agregado.")
     else:
       print("El reporte actual no ha sido agregado.")
 
-def imprimirListado(printCentradoNumText, printTiempoCentrado, funcPromedio, STRING_VACIO, KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA, KILOMETROS, TONELADAS, ANCHO_DE_COLUMNA, MENSAJE_REVISION_MECANICA, idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes):
+def imprimirListado(printCentradoNumText, printTiempoCentrado, funcPromedio, STRING_VACIO, 
+                    KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA, KILOMETROS, TONELADAS, ANCHO_DE_COLUMNA, MENSAJE_REVISION_MECANICA, 
+                    idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes):
+    print(ENCABEZADO_DE_LISTADO)
     for i in range(len(idCamion)):
       printCentradoNumText(idCamion[i],STRING_VACIO,ANCHO_DE_COLUMNA)
       dias,horas=funcPromedio(tiempoDeUsoDeCamion[i],cantidadDeViajes[i])
@@ -108,17 +104,6 @@ def imprimirListado(printCentradoNumText, printTiempoCentrado, funcPromedio, STR
         print(MENSAJE_REVISION_MECANICA)
       print()
 
-HORAS = "H"
-DIAS = "D"
-STRING_VACIO = ""
-ESPACIO = " "
-KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA = 20000
-KILOMETROS = " km"
-TONELADAS = " Tn"
-ANCHO_DE_COLUMNA = 21
-ENCABEZADO_DE_LISTADO = "       CAMION           TIEMPO PROMEDIO    DISTANCIA RECORRIDA      CARGA TOTAL"
-ALERTA_DE_IDCAMION_INVALIDO = "Numero incorrecto, por favor, ingresar un camion con un numero valido (entero positivo) : "
-MENSAJE_REVISION_MECANICA = "Revisión mecánica"
 
 idCamion=[]
 tiempoDeUsoDeCamion=[]
@@ -126,23 +111,23 @@ distanciaTotalRecorrida=[]
 cargaCamion=[]
 cantidadDeViajes=[]
 
-idIngresado=int(input("Por favor, ingresar el numero de camion: "))
+idIngresado=int(input(INGRESAR_ID_CAMION))
 
 while idIngresado<=0: 
-  idIngresado=int(input("Numero incorrecto. Por favor, ingresar un camion con un numero valido (entero positivo) : ")) 
+  idIngresado=int(input(ALERTA_DE_IDCAMION_INVALIDO)) 
 
 while idIngresado != -1 :
-  tiempoIngresado=int(input("Por favor, ingresar el tiempo de uso del camion en horas: "))
-  distanciaIngresada=int(input("Por favor, ingresar la distancia recorrida del camion en kilometros: "))
-  cargaIngresada=int(input("Por favor, ingresar la carga transportada del camion en toneladas: "))
+  tiempoIngresado=int(input(INGRESAR_TIEMPO_DE_USO))
+  distanciaIngresada=int(input(INGRESAR_DISTANCIA_RECORRIDA))
+  cargaIngresada=int(input(INGRESAR_CARGA_TRANSPORTADA))
   confirmarIngreso(idIngresado, tiempoIngresado, distanciaIngresada, cargaIngresada)
-  print("---------------------------------------------------------------------------------------------")
-  idIngresado=int(input("Por favor, ingresar numero de camion: "))
+  print(ESPACIO)
+  idIngresado=int(input(INGRESAR_ID_CAMION))
   while idIngresado < -1 or idIngresado==0:
     idIngresado=int(input()) 
 
 idCamion,tiempoDeUsoDeCamion,distanciaTotalRecorrida,cargaCamion,cantidadDeViajes=ordenarLista(idCamion,tiempoDeUsoDeCamion,distanciaTotalRecorrida,cargaCamion,cantidadDeViajes)
 
-print(ENCABEZADO_DE_LISTADO)
+print(SEPARADOR)
 
 imprimirListado(printCentradoNumText, printTiempoCentrado, funcPromedio, STRING_VACIO, KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA, KILOMETROS, TONELADAS, ANCHO_DE_COLUMNA, MENSAJE_REVISION_MECANICA, idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes)
