@@ -19,14 +19,15 @@ CONFIRMACION_DISTANCIA_RECORRIDA = "Distancia recorrida:"
 CONFIRMACINO_CARGA = "Carga:"
 CONFIRMACION_INGRESO = "Ingrese S para aceptar u otra tecla para descartar el ingreso: "
 CONFIRMACION_REPORTE_CREADO = "El reporte actual fue agregado."
-CONFIRMACION_REPORTE_RECHAZADO = "El reporte actual fue agregado."
-
+CONFIRMACION_REPORTE_RECHAZADO = "El reporte actual no fue agregado."
+ 
 idCamion=[]
 tiempoDeUsoDeCamion=[]
 distanciaTotalRecorrida=[]
 cargaCamion=[]
 cantidadDeViajes=[]
-
+ 
+ #mate
 def contarDigitos(numero):
     contador=0
     if numero<0:
@@ -37,10 +38,12 @@ def contarDigitos(numero):
         numero=numero//10
     return contador
 
+ # leandro
 def printNEspacios(cantidad):
     for i in range(cantidad):
       print(" ",end="")
-
+ 
+ #mate
 def printCentradoNumText(numero,texto,espacioMaximo):
     largoTotal=contarDigitos(numero)+len(texto)
     if largoTotal>=espacioMaximo:
@@ -52,7 +55,8 @@ def printCentradoNumText(numero,texto,espacioMaximo):
     print(numero,end="")
     print(texto,end="")
     printNEspacios(espaciosBlanco-espaciosBlanco//2)
-
+ 
+ #leandro
 def printTiempoCentrado(dias,horas,espacioMaximo):
     if dias==0 and horas==0:
         printCentradoNumText(0,UNIDAD_HORAS,espacioMaximo)
@@ -75,32 +79,38 @@ def printTiempoCentrado(dias,horas,espacioMaximo):
     print(UNIDAD_DIAS,horas,end="")
     print(UNIDAD_HORAS,end="")
     printNEspacios(espaciosBlanco-espaciosBlanco//2)
-
+ 
+ #mate
 def validarEntradaPositiva(texto):
     valor=int(input(texto))
     while valor<=0:
         valor=int(input(texto))
     return valor
-
+  
+  # TOBY 
 def intercambiarElementos(lista, posicion):
     aux = lista[posicion + 1]
     lista[posicion + 1] = lista[posicion]
     lista[posicion] = aux
-
+ 
+ #toby
 def mover(listas,posicion):
   for i in range(len(listas)):
     intercambiarElementos(listas[i],posicion)
-
+ 
+#toby
 def ordenarLista():
     for i in range(len(idCamion)):
         for j in range(len(idCamion) - i - 1):
             if cargaCamion[j] > cargaCamion[j + 1]:
               mover([idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes],j)
-
+ 
+ #leandro
 def crearTiempoPromedio(tiempoDeUnCamion,cantidadDeViajesDeUnCamion):
     promedio=tiempoDeUnCamion//cantidadDeViajesDeUnCamion
     return promedio//24,promedio%24
-
+ 
+ #santi
 def listar(idIngresado, tiempoIngresado,distanciaIngresada,cargaIngresada):
     for i in range(len(idCamion)):
         if idIngresado==idCamion[i]:
@@ -114,7 +124,8 @@ def listar(idIngresado, tiempoIngresado,distanciaIngresada,cargaIngresada):
     distanciaTotalRecorrida.append(distanciaIngresada)
     cargaCamion.append(cargaIngresada)
     cantidadDeViajes.append(1)
-
+ 
+ #santi
 def confirmarIngreso(idIngresado, tiempoIngresado, distanciaIngresada, cargaIngresada):
     print(CONFIRMACION_AGREGAR)
     print(CONFIRMACION_ID_CAMION, idIngresado)
@@ -127,8 +138,9 @@ def confirmarIngreso(idIngresado, tiempoIngresado, distanciaIngresada, cargaIngr
       print(CONFIRMACION_REPORTE_CREADO)
     else:
       print(CONFIRMACION_REPORTE_RECHAZADO)
-
-def imprimirListado(idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes):
+ 
+ #Manu
+def imprimirReporte():
     for i in range(len(idCamion)):
       printCentradoNumText(idCamion[i],"",ANCHO_DE_COLUMNA)
       dias,horas=crearTiempoPromedio(tiempoDeUsoDeCamion[i],cantidadDeViajes[i])
@@ -138,10 +150,9 @@ def imprimirListado(idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, carg
       if distanciaTotalRecorrida[i]>KILOMETRAJE_MINIMO_PARA_REVISION_TECNICA:
         print(MENSAJE_REVISION_MECANICA)
       print()
-
-
+ 
 idIngresado=validarEntradaPositiva(INGRESAR_ID_CAMION)
-
+ 
 while idIngresado != -1 :
   tiempoIngresado=validarEntradaPositiva(INGRESAR_TIEMPO_DE_USO)
   distanciaIngresada=validarEntradaPositiva(INGRESAR_DISTANCIA_RECORRIDA)
@@ -150,10 +161,10 @@ while idIngresado != -1 :
   print(SEPARADOR)
   idIngresado=int(input(INGRESAR_ID_CAMION))
   while idIngresado < -1 or idIngresado==0:
-    idIngresado=int(input(ALERTA_DE_ID_CAMION_INVALIDO)) 
-
+    idIngresado=int(input(ALERTA_DE_ID_CAMION_INVALIDO))
+ 
 ordenarLista()
-
+ 
 print(ENCABEZADO_DE_LISTADO)
-
-imprimirListado(idCamion, tiempoDeUsoDeCamion, distanciaTotalRecorrida, cargaCamion, cantidadDeViajes)
+ 
+imprimirReporte()
